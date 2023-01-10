@@ -1,6 +1,7 @@
 import csv
 from .playerinfo.PlayerInfo import PlayerInfo
 
+
 def get_data(filename: str = 'data.tsv'):
     data = _load_data(filename)
     return data
@@ -14,6 +15,7 @@ def _load_data(filename: str = 'data.tsv'):
 def _load_raw_data(filename: str = 'data.tsv'):
     with open(filename) as file:
         tsv_file = csv.reader(file, delimiter="\t")
+        next(tsv_file)
         return [l for l in tsv_file]
 
 
