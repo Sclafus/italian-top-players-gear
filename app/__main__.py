@@ -35,9 +35,11 @@ def transform_raw_data(data: str):
         )
     for line in data[1:]]
 
+
 def get_headers(filename: str = 'data.tsv'):
     data = _load_raw_data(filename)
-    return data[0]
+    return [entry.replace('|', '/') for entry in data[0]]
+
 
 def make_table(data: list[PlayerInfo]):
     import tabulate
