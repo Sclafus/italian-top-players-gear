@@ -1,4 +1,5 @@
 import csv
+import tabulate
 from .playerinfo.PlayerInfo import PlayerInfo
 
 
@@ -9,7 +10,8 @@ def get_data(filename: str = 'data.tsv'):
 
 def _load_data(filename: str = 'data.tsv'):
     data = _load_raw_data(filename)
-    return transform_raw_data(data)
+    data_trimmed = _trim_raw_data(data)
+    return transform_raw_data(data_trimmed)
 
 
 def _load_raw_data(filename: str = 'data.tsv'):
@@ -19,7 +21,12 @@ def _load_raw_data(filename: str = 'data.tsv'):
         return [l for l in tsv_file]
 
 
-def transform_raw_data(data: str):
+def _trim_raw_data(data: list[list[str]]):
+    data = [row for row in data if row[1] != '']
+    return data
+
+
+def transform_raw_data(data: list[list[str]]):
     return [
         PlayerInfo(
             rank = int(line[0]),
@@ -45,7 +52,6 @@ def get_headers(filename: str = 'data.tsv'):
 
 
 def make_table(data: list[PlayerInfo]):
-    import tabulate
     return tabulate.tabulate(data, headers=get_headers(), tablefmt='github')
 
 
