@@ -20,6 +20,7 @@ def _load_raw_data(filename: str = 'data.tsv'):
 def transform_raw_data(data: str):
     return [
         PlayerInfo(
+            rank = int(line[0]),
             pp = int(line[1].replace(',', '')),
             username = line[2],
             city = line[3],

@@ -2,6 +2,7 @@ from dataclasses import astuple, dataclass
 
 @dataclass
 class PlayerInfo:
+    rank: int
     pp: int
     username: str
     city: str
