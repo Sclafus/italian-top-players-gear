@@ -29,8 +29,8 @@ def _trim_raw_data(data: list[list[str]]):
 def transform_raw_data(data: list[list[str]]):
     return [
         PlayerInfo(
-            rank = int(line[0]),
-            pp = int(line[1].replace(',', '')),
+            rank = int(line[0]) if line[0] != '#ERROR!' else -1,
+            pp = int(line[1].replace(',', '')) if line[1] != '#ERROR!' else 0,
             username = line[2],
             city = line[3],
             play_style = line[4],
