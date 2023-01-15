@@ -55,9 +55,18 @@ def make_table(data: list[PlayerInfo]):
     return tabulate.tabulate(data, headers=get_headers(), tablefmt='github')
 
 
+def write_table(new_table: str, separator = '[//]: # (Table)\n'):
+    file_content = ""
+    with open('README.md') as f:
+        file_content = f.read()
+
+    header, _ = file_content.split(separator)
+
+    with open('README.md', 'w') as f:
+        f.write(f"{header}{separator}\n{new_table}")
+
+
 if __name__ == '__main__':
     data = get_data()
     table = make_table(data)
-
-    with open('README.md', 'w') as f:
-        f.write(table)
+    write_table(table)
